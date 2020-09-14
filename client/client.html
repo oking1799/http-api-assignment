@@ -4,10 +4,58 @@
   <title>Our simple HTTP server</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-  <script type="text/babel">
+  
+<script>
 
-  </script>
+const handleResponse = (xhr) => {
+			console.log(xhr.response);
+      const type = xhr.getResponseHeader("content-type");
+      let id = "???";
+      let message = "???";
+      
+			if(type === 'application/json'){
+        const obj = JSON.parse(xhr.response);
+        id = obj.id;
+        message = obj.message;
+        
+			}else if(type === 'text/xml'){
+        message = xhr.responseXML.querySelector("message").textContent;
+        id = xhr.responseXML.querySelector("id").textContent;
+      }
+      
+      document.querySelector("#content").innerHTML = `
+			  <hr>
+			  <h1>${id}</h1>
+			  <p>${message}</p>
+			  `;
+    };
+
+const sendAjax = (url, acceptedType) => {
+			console.log(url,acceptedType);
+			const xhr = new XMLHttpRequest();
+			
+			xhr.open("GET",url);
+			xhr.setRequestHeader('Accept', acceptedType);
+			
+			xhr.onload = () => handleResponse(xhr);
+	
+			xhr.send();
+			
+    };
+
+  const init = () => {
+    const sendButton = document.querySelector("#send");
+    const status = document.querySelector("#page");
+    const queryType = document.querySelector("#type");
+
+    sendButton.onclick = () => {
+      console.log("status: " + status.value);
+      sendAjax(status.value, queryType.value);
+    }
+  }
+
+  window.onload = init;
+</script>
 </head>
 <body>
   <section id="top">

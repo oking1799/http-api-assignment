@@ -1,0 +1,27 @@
+{
+  "name": "http-api-assignment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests Complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oking1799/http-api-assignment.git"
+  },
+  "author": "Owen King",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oking1799/http-api-assignment/issues"
+  },
+  "homepage": "https://github.com/oking1799/http-api-assignment#readme",
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  },
+  "dependencies": {},
+  "description": ""
+}
